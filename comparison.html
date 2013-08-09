@@ -24,7 +24,7 @@
         <!-- Included JS Files -->
         <script src="js/modernizr.foundation1.js"></script>
 	
-        <script src="js/jquery.foundation.accordion.js"></script>
+       <script src="js/jquery.foundation.accordion.js"></script>
 </head>    
         
 <body>
@@ -49,9 +49,9 @@
             
                 <select class="selectState">
                     <option id="default">-- SELECT YOUR STATE --</option>
-                    {% for i in states %}
-                        <option id="{{i.pk}}">{{i.name}}</option>
-                    {% endfor %}
+                    
+                        <!--<option id="{{i.pk}}">{{i.name}}</option>-->
+                    
                 </select>
             </div>
         </div>
@@ -59,7 +59,7 @@
         <ul class="accordion">
             <li class="active">
                 <div class="title">
-                    <span class="iconSpace"><img src="{{STATIC_URL}}/images/sun.png" height="38px" width="38px"/></span><span class="textHeadAccordion">Weather</span>
+                    <span class="iconSpace"><img src="images/sun.png" height="38px" width="38px"/></span><span class="textHeadAccordion">Weather</span>
                 </div>
                 <div class="content">
                     <div class="textP">While the Galapagos is located on the Equator, the Humboldt Current carries cooler water to
@@ -137,7 +137,7 @@
                                 from the 2011 State of the Birds report, which outlined 11 habitats for more than 800 bird species in the continental 
                                 U.S., Hawaii and U.S. oceans.  The habitats include the following: aridlands, grasslands, forests, arctic & alpine, wetlands, 
                                 coasts, oceans, Hawaii, other islands, urban and upland game.  The number of birds per state correlates with the number of birds 
-                                in the habitat in which the majority of the state’s land falls.  </div>
+                                in the habitat in which the majority of the state's land falls.  </div>
                             </div>
                         </div>
                         <div class="six columns">
@@ -145,7 +145,7 @@
                             <div class="textHeadLoc">Galapagos</div>
                             <div class="textP">
                                 <h4>Protected Land</h4>
-                                <span class="graphSpace"></span><img src="images/falapagosFinal.png" width="70%"/>
+                                <span class="graphSpace"></span><img src="images/galapagosFinal.png" width="70%"/>
                                 <div class="graphSpace"></div>
                                 <div class ="landNum">97%</div>
                                 <h4>Birds in Region</h4>
@@ -190,7 +190,7 @@
                                 <span class ="textItems">$<span id="state-income"></span>
                                 <span id="state-income_text"></span></span>
                                 <h4>Industry Breakdown</h4>
-                                <img src="{{ STATIC_URL }}images/galapagosGraphs/statesLegend.png" />
+                                <img src="images/galapagosGraphs/statesLegend.png" />
                                 <span id="state-industry"></span>
                             </div>
                         </div>
@@ -202,7 +202,7 @@
                                 <span class ="textItems">$185,000,000</span>
                                 <h4>Average Household Income</h4>
                                 <span class ="textItems">$2,586
-                                <img src="{{specificGalapagos.income_text}}" width="60px" /></span>
+                                <img src="images/home1.png" width="60px" /></span>
                                 <h4>Industry Breakdown</h4>
                                 <img src="images/galapagosGraphs/legend.png" height="38px"/>
                                 <div class="graphSpace">
@@ -380,6 +380,23 @@ $(document).ready(function() {
 	$("#header").scrollTop(0); //prevent page jumping
 	$(".accordion").hide();	
 });
+    /*$.ajax({
+            url: 'js/states.json',
+            dataType: 'json',
+            success: function(data) {
+                $.each(data, function() {
+                $.each(this, function(k, v) {
+                $('<option id="' + (this).pk + '">' + (this).fields.name + '</option>').appendTo('.selectState');
+                })
+                })
+            }
+            });*/
+    $.getJSON('js/states.json', function(data) {
+        $.each(data, function(index) {
+             $('<option id="' + data[index].pk + '">' + data[index].fields.name + '</option>').appendTo('.selectState');
+        });
+    });
+    
     $(".selectState").change(function() {
     	$("#state-student-image").empty();
     	$(".accordion").show();

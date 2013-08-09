@@ -1,5 +1,5 @@
 $(document).foundationAccordion();
-;(function ($, window, undefined){
+(function ($, window, undefined){
   'use strict';
 
   $.fn.foundationAccordion = function (options) {
